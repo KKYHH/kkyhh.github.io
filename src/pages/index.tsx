@@ -1,30 +1,29 @@
 import { graphql, PageProps } from 'gatsby'
+import Layout from '../components/common/Layout'
 
 export default function Index({
   data: {
-    allContentfulBlog: { edges },
+    allContentfulBlog: { nodes },
   },
 }: PageProps<Queries.IndexPageQuery>) {
   return (
-    <div>
-      {edges.map(({ node: { title, slug, date } }) => (
+    <Layout>
+      {nodes.map(({ title, slug, date }) => (
         <div key={slug}>
           {title} / {date} / {slug}
         </div>
       ))}
-    </div>
+    </Layout>
   )
 }
 
 export const query = graphql`
   query IndexPage {
     allContentfulBlog(sort: { date: DESC }) {
-      edges {
-        node {
-          title
-          slug
-          date
-        }
+      nodes {
+        title
+        slug
+        date
       }
     }
   }
