@@ -23,6 +23,11 @@ export default function Index({
     { All: nodes.length },
   )
 
+  const posts = nodes.filter(
+    ({ category }) =>
+      selectedCategory === 'All' || category?.includes(selectedCategory),
+  )
+
   const handleSelectCategory = (category: string) =>
     setSelectedCategory(category)
 
@@ -35,7 +40,7 @@ export default function Index({
         handleSelect={handleSelectCategory}
       />
 
-      {nodes.map(({ title, slug, date }) => (
+      {posts.map(({ title, slug, date }) => (
         <div key={slug}>
           {title} / {date} / {slug}
         </div>
