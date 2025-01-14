@@ -38,7 +38,7 @@ const Menu = styled.div`
 export default function Header() {
   return (
     <Wrapper>
-      <Title to="/">Developer K</Title>
+      <Title to="/">KKYHH</Title>
 
       <Menu>
         <a href="https://github.com/KKYHH" target="_blank">
