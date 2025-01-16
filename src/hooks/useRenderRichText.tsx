@@ -1,22 +1,9 @@
-// import {
-//   ContentfulRichTextGatsbyReference,
-//   renderRichText,
-// } from 'gatsby-source-contentful/rich-text'
-// import { Options } from '@contentful/rich-text-react-renderer'
+import { renderRichText } from 'gatsby-source-contentful/rich-text'
+import { Options } from '@contentful/rich-text-react-renderer'
 
-// const options: Options = {}
+const options: Options = {}
 
-// export default function useRenderRichText({
-//   raw,
-//   references,
-// }: Queries.ContentfulBlog) {
-//   if (!raw) return null
-
-//   return renderRichText(
-//     {
-//       raw,
-//       references: references as unknown as ContentfulRichTextGatsbyReference[],
-//     },
-//     options,
-//   )
-// }
+export default function useRenderRichText(raw: string | null | undefined) {
+  if (!raw) return null
+  return renderRichText({ raw }, options)
+}

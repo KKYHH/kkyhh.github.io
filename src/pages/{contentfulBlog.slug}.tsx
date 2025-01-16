@@ -1,6 +1,7 @@
 import { PageProps, graphql } from 'gatsby'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import PostHead from '../components/post/PostHead'
+import PostBody from '../components/post/PostBody'
 
 export default function Post({
   data: { contentfulBlog },
@@ -15,6 +16,7 @@ export default function Post({
           contentfulBlog?.thumbnail?.gatsbyImageData as IGatsbyImageData
         }
       />
+      <PostBody content={contentfulBlog?.content?.raw} />
     </>
   )
 }

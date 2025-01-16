@@ -1,7 +1,8 @@
 import styled from 'styled-components'
+import useRenderRichText from '../../hooks/useRenderRichText'
 
 type PostBodyProps = {
-  content: Queries.ContentfulBlog
+  content: string | null | undefined
 }
 
 const Wrapper = styled.div`
@@ -25,10 +26,11 @@ const Content = styled.div`
 `
 
 export default function PostBody({ content }: PostBodyProps) {
+  const richTextContent = useRenderRichText(content)
   return (
     <Wrapper>
       <Content>
-        <div id="content">{/* 렌더링된 게시글이 들어갈 자리 */}</div>
+        <div id="content">{richTextContent}</div>
         {/* 댓글 컴포넌트가 들어갈 자리 */}
       </Content>
       {/* 플로팅 목차 컴포넌트가 들어갈 자리 */}
