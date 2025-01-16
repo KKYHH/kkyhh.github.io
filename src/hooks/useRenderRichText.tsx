@@ -1,7 +1,7 @@
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
 import { NodeRenderer, Options } from '@contentful/rich-text-react-renderer'
 import { getImage } from 'gatsby-plugin-image'
-import { BLOCKS, INLINES } from '@contentful/rich-text-types'
+import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 import {
   Blockquote,
   Heading,
@@ -10,6 +10,7 @@ import {
   UnorderedList,
   Image,
   Link,
+  Code,
 } from './node'
 
 export const HEADERS = [
@@ -18,7 +19,25 @@ export const HEADERS = [
   BLOCKS.HEADING_3,
 ] as const
 
+const CODE_METADATA_REGEX = /^language::(\w+)/
+
 const options: Options = {
+  renderMark: {
+    [MARKS.CODE]: text => {
+      const isBlock = !!text && CODE_METADATA_REGEX.test(text.toString())
+
+      if (!isBlock) return <Code>{text}</Code>
+      else
+        return (
+          <Code
+            isBlock
+            className={`language-${CODE_METADATA_REGEX.exec(text.toString())?.[1]}`}
+          >
+            {text.toString().replace(CODE_METADATA_REGEX, '').trimStart()}
+          </Code>
+        )
+    },
+  },
   renderNode: {
     ...HEADERS.reduce<{ [block: string]: NodeRenderer }>((nodes, header) => {
       nodes[header] = (node, children) => (
