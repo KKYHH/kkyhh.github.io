@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import useRenderRichText from '../../hooks/useRenderRichText'
 import Prism from 'prismjs'
 import 'prismjs/components/prism-typescript'
+import Comment from './Comment'
 
 type PostBodyProps = {
   content: string | null | undefined
@@ -37,7 +38,7 @@ export default function PostBody({ content }: PostBodyProps) {
     <Wrapper>
       <Content>
         <div id="content">{richTextContent}</div>
-        {/* 댓글 컴포넌트가 들어갈 자리 */}
+        <Comment />
       </Content>
       {/* 플로팅 목차 컴포넌트가 들어갈 자리 */}
     </Wrapper>
